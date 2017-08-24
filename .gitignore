@@ -1,4 +1,6 @@
-.env/
+.venv/
 *.pyc
 .idea/
 *.sqlite3
+*.env
+*.ini`
