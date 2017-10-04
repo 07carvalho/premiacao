@@ -1,0 +1,32 @@
+body {
+    background-color: #222326;
+    color: #FFFFFF;
+}
+
+button.vote-btn {
+    background-color: #AC6805 !important;
+    border-color: #AC6805 !important;
+    cursor: pointer;
+}
+
+button.vote-btn:hover {
+    background-color: rgba(172,104,5,0.7) !important;
+}
+
+.requirements {
+    color: #AC6805;
+}
+
+.requirement-item {
+    color: #78797B;
+}
+
+input[type='text'] {
+    background-color: rgba(34,35,38, 0.7) !important;
+    color: #FFF !important;
+    border-color: #FFF !important;
+}
+
+input[type='text']:focus {
+    border-color: #AC6805 !important;
+}
