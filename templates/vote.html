@@ -1,25 +1,34 @@
 {% extends '_base.html' %}
 {% block content %}
-    {% for item in lista %}
-    <div class="row" style="margin-bottom: 64px;">
-        <div class="col-sm-12 col-md-6">
-            <h2>{{ item.category.name }}</h2>
-            <p class="requirements">Requisitos</p>
-            {% for r in item.requirements %}
-                <p class="requirement-item">{{ r.text }}</p>
-            {% endfor %}
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-                <label for="category-{{ item.category.id }}">Indicação</label>
-                <input id="nomination-{{ item.category.id }}"
-                       class="form-control" type="text" value="{{ item.response }}">
+        <main>
+            <div class="award-wrapper">
+                <div class="container">
+                    <h1>Jaraqui Graúdo 2017</h1>
+                </div>
             </div>
-            <div class="form-group">
-                <button class="btn vote-btn btn-primary float-right" type="button"
-                        category-id="{{ item.category.id }}">Votar</button>
+            <div class="container">
+                {% for item in lista %}
+                <div class="category-wrapper row">
+                    <div class="category col-sm-12 col-md-3">
+                        <h2>#<br>{{ item.category.name }}</h2>
+                        <p class="requirement requirement-label">Requisitos:</p>
+                        {% for r in item.requirements %}
+                            <p class="requirement requirement-item">{{ r.text }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="indication col-sm-12 col-md-9">
+                        <div class="form-group">
+                            <label for="category-{{ item.category.id }}">Indicação:</label>
+                            <input id="nomination-{{ item.category.id }}"
+                                   class="form-control" type="text" value="{{ item.response }}">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn vote-btn btn-primary float-right" type="button"
+                                    category-id="{{ item.category.id }}">Votar</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-        </div>
-    </div>
-    {% endfor %}
+        </main>
 {% endblock %}

@@ -1,5 +1,33 @@
 {% extends '_base.html' %}
+{% load socialaccount %}
 {% block content %}
-    <h1>Premiação</h1>
-    <a href="/vote/">Votação</a>
+        <main>
+            <div id="main">
+                <div id="overlay">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div style="width: 80%; max-width: 425px; height: auto;margin: 0 auto;">
+                                    <img id="logo-jaraqui" src="/static/img/logo.png">
+                                </div>
+                            </div>
+                            <div id="edition-wrapper" class="col-sm-12">
+                                <div>
+                                    <h4 class="text-center">Fase 1</h4>
+                                    <p class="text-center">Acesse e indique seus nomes favoritos para cada categoria!</p>
+                                </div>
+                            </div>
+                            <div id="buttons-wrapper" class="col-sm-12">
+                                <p class="text-center" style="margin: 0;">
+                                    <a class="btn sign-btn fb-btn" href="{% provider_login_url "facebook" method="oauth2" %}" value="email,public_profile,user_friends">Entrar com Facebook</a>
+                                </p>
+                                <p class="text-center" style="margin: 0;">
+                                    <a class="btn sign-btn gl-btn" href="{% provider_login_url "google" %}" style="">Entrar com Google</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
 {% endblock %}

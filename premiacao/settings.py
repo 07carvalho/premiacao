@@ -39,8 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'django_extensions',
     'api',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +79,40 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'premiacao.wsgi.application'
 
+# auth and allauth settings
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/vote/'
+#SOCIALACCOUNT_QUERY_EMAIL = True
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+#ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_UNIQUE_EMAIL = False
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_ADAPTER = 'api.views.award.MyAdapter'
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'METHOD': 'js_sdk'  # instead of 'oauth2'
+    },
+    'google': {
+        'SCOPE': [
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email'
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -130,3 +170,12 @@ STATICFILES_DIRS = (
     # os.path.join(BASE_DIR, 'static', 'photo_profile')
     # os.path.join(BASE_DIR, 'img'),
 )
+
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'jukxapp@gmail.com'
+SERVER_EMAIL = 'jukxapp@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'jukxapp@gmail.com'
+EMAIL_HOST_PASSWORD = 'jUkxaPP2015'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
