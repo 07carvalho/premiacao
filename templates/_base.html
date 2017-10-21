@@ -2,10 +2,13 @@
 <html lang="en-us" ng-app="paredao">
     <head>
         <meta charset="UTF-8">
-        <title>Prêmio Jaraqui Graúdo - Fase 1</title>
+        <title>Prêmio Jaraqui Graúdo 2017</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load compress %}
+        {% compress css %}
         <link rel="stylesheet" type="text/css" href="/static/lib/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/static/css/premiacao.min.css">
+        {% endcompress %}
     </head>
     <body>
         {% block content %}
@@ -13,8 +16,7 @@
     </body>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="/static/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/static/js/premiacao.min.js"></script>
+    {% compress js %}
     <script type="text/javascript">
         function getCookie(name) {
             var cookieValue = null;
@@ -47,4 +49,7 @@
             }
         });
     </script>
+    <script src="/static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/premiacao.min.js"></script>
+    {% endcompress %}
 </html>

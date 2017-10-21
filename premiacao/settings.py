@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True #config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
+ALLOWED_HOSTS = ['156d7978.ngrok.io',] #config('ALLOWED_HOSTS', default=[], cast=Csv())
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_extensions',
+    'compressor', # https://github.com/django-compressor/django-compressor/issues/807
     'api',
     'allauth',
     'allauth.account',
@@ -78,6 +79,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'premiacao.wsgi.application'
+
+# compressor
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_ENABLED = True
 
 # auth and allauth settings
 SITE_ID = 1

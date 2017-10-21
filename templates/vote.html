@@ -2,8 +2,10 @@
 {% block content %}
         <main>
             <div class="award-wrapper">
-                <div class="container">
+                <div class="container" style="position: relative;">
+                    <div class="logout"><a href="{% url 'logout' %}">Sair</a></div>
                     <h1>Jaraqui Graúdo 2017</h1>
+                    <h5>Primera Fase - indicações</h5>
                 </div>
             </div>
             <div class="container">
@@ -16,7 +18,7 @@
                             <p class="requirement requirement-item">{{ r.text }}</p>
                         {% endfor %}
                     </div>
-                    <div class="indication col-sm-12 col-md-9">
+                    <div class="indication col-sm-12 col-md-9" category-id="{{ item.category.id }}">
                         <div class="form-group">
                             <label for="category-{{ item.category.id }}">Indicação:</label>
                             <input id="nomination-{{ item.category.id }}"

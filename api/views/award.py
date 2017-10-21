@@ -26,19 +26,21 @@ class MyAdapter(DefaultSocialAccountAdapter):
 def set_user_response(request):
 
     if request.method == "POST":
+        try:
+            with transaction.atomic():
+                edition = Edition.objects.get(is_active=True)
+                category = Category.objects.get(id=request.POST.get("category"), edition=edition)
+                obj, created = UserNomination.objects.update_or_create(
+                        category=category, user=request.user, edition=edition,
+                        defaults={'response': request.POST.get("response")}
+                    )
 
-        with transaction.atomic():
-            edition = Edition.objects.get(is_active=True)
-            obj, created = UserNomination.objects.update_or_create(
-                    category_id=request.POST.get("category"),
-                    user=request.user, edition=edition,
-                    defaults={'response': request.POST.get("response")}
-                )
-
-            if created:
-                return JsonResponse({'message': 'Voto registrado com sucesso!'})
-            return JsonResponse({'message': 'Voto alterado com sucesso!'})
-    return JsonResponse({'message': 'fail'})
+                if created:
+                    return JsonResponse({'message': 'Voto registrado com sucesso!'}, status=200)
+                return JsonResponse({'message': 'Voto alterado com sucesso!'}, status=200)
+        except:
+            return JsonResponse({'message': 'Desculpe, ocorreu algum erro!'}, status=500)
+    return JsonResponse({'message': 'Método não autorizado'}, status=500)
 
 
 def logout_view(request):
